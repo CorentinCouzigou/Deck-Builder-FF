@@ -5,30 +5,30 @@ const app = express();
 const router = require('./app/router');
 const PORT = process.env.PORT || 1234;
 const mongoDBClient = require('./app/database')
-// const expressSession = require('express-session');
-
-// app.use(expressSession ({
-//   resave: true,
-//   saveUninitialized: true,
-//   secret:process.env.SECRET,
-//   cookie: {
-//       secure: false,
-//       maxAge: (1000*60*60)
-//   }
-// }));
-// app.use((request, response, next) => {
-//   let deck = null;
-//   if (request.session.deck) {
-//       deck = request.session.deck;
-//   }
-//   response.locals.deck = deck;
-//   next();
-// });
+const expressSession = require('express-session');
 
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', 'app/views');
 app.use(express.static('public'));
+
+app.use(expressSession({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SECRET,
+  cookie: {
+    secure: false,
+    maxAge: (1000 * 60 * 60)
+  }
+}));
+app.use((request, response, next) => {
+	if (!request.session.deck) {
+		request.session.deck = []
+	}
+	next();
+});
+
+
 
 app.use(router);
 

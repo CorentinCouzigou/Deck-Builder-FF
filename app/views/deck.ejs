@@ -1,18 +1,21 @@
 <%- include('partials/header') %>
 
-<% if (locals.deck) { %>
-    <% for (let card of deck) { %>
-        <div class="cardsContainer">
+<h1><%= title %></h1>
+
+<div class="cardsContainer">
+<% if (cards.length > 0) { %>
+    <% for (let card of cards) { %>
+        
             <div class="card">
-                <img src="/visuals/<%= card.visual_name %>" alt="<%= card.name %> illustration">
+                <img src="/visuals/<%= card.visual %>" alt="<%= card.name %> illustration">
                <p class="cardName"><%= card.name %></p>
               </a>
-              <a class="link--addCard" title="Enlever du deck" href="/deck/delete/<%= card.id %>">[ - ]</a>
+              <a class="link--addCard" title="Enlever du deck" href="/deck/delete/<%= card._id %>">[ - ]</a>
             </div>
         
-        </div>
-        
+        <hr>
     <% } %>
 <% } %>
+</div>
 
 <%- include('partials/footer') %>

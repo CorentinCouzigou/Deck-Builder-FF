@@ -15,8 +15,8 @@ router.get('/search/:direction/:value', searchController.searchCard)
 router.get('/search/:name', searchController.searchCard)
 
 router.get('/deck', deckController.deckPage);
-router.post('/deck/add/:id', deckController.addCard);
-router.delete('/deck/delete/:id', deckController.deleteCard);
+router.get('/deck/add/:id', deckController.addCard);
+router.get('/deck/delete/:id', deckController.deleteCard);
 
 
 
