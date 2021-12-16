@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+<% if (locals.deck) { %>
+    <% for (let card of deck) { %>
+        <div class="cardsContainer">
+            <div class="card">
+                <img src="/visuals/<%= card.visual_name %>" alt="<%= card.name %> illustration">
+               <p class="cardName"><%= card.name %></p>
+              </a>
+              <a class="link--addCard" title="Enlever du deck" href="/deck/delete/<%= card.id %>">[ - ]</a>
+            </div>
+        
+        </div>
+        
+    <% } %>
+<% } %>
+
+<%- include('partials/footer') %>
