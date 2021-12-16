@@ -22,13 +22,46 @@ const dataMapper = {
     });
   },
 
-  searchCard: (element, callback) => {
-    const byElement = {
-      text: `SELECT * FROM "card" WHERE "element"= '${element}';`,
-      // values: [element]
-    }
+  searchCardByElement: async (element, callback) => {
+    const byElement = await cardSchema.find({ element: element }).exec().then(card => {
+      callback(null, card);
+    }).catch((e) => {
+      console.error(e)
+      callback(e, null);
+    });
     console.log(`ma recherche mapper ${byElement}`);
-    client.query(byElement, callback)
+  },
+
+  searchCardByLevel: async (level, callback) => {
+    const byLevel = await cardSchema.find({ level: level }).exec().then(card => {
+      callback(null, card);
+    }).catch((e) => {
+      console.error(e)
+      callback(e, null);
+    });
+    console.log(`ma recherche mapper ${byLevel}`);
+  },
+
+  searchCardByDirectionAndValue: async (direction, value, callback) => {
+    console.log(direction, "direction", "value", value);
+    const directionValue = `values.${direction}`;
+    const byDirecitonAndValue = await cardSchema.find({ [directionValue]: value }).exec().then(card => {
+      callback(null, card);
+    }).catch((e) => {
+      console.error(e)
+      callback(e, null);
+    });
+    console.log(`ma recherche dattamapper ${byDirecitonAndValue}`);
+  },
+
+  searchCardByName: async (name, callback) => {
+    const byName = await cardSchema.find({ name: name }).exec().then(card => {
+      callback(null, card);
+    }).catch((e) => {
+      console.error(e)
+      callback(e, null);
+    });
+    console.log(`ma recherche mapper ${byName}`);
   }
 };
 

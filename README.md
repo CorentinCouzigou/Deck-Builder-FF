@@ -1,2 +1,3 @@
 # DeckBuilder Final Fantasy
-Utilisation express, express-session, pg ejs, dotenv
+
+Technologies: NodeJS/express/MangoDB/Mangoose/express-session/ejs/dotenv
