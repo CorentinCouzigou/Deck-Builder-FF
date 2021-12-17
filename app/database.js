@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const MongoDBClient = {
     initialize: () => {
         try {
-            const client = mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_SECRET}@cluster0.ayvxd.mongodb.net/deckbuilder?retryWrites=true&w=majority`, {
+            const client = mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_SECRET}@cluster0.ayvxd.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             })
