@@ -3,14 +3,12 @@ const dataMapper = require('../dataMapper');
 const deckController = {
 
   deckPage: (request, response) => {
-    console.log("deck", request.session.deck)
     response.render('deck', { cards: request.session.deck, title: 'Deck de cartes' });
 
   },
 
   addCard: (request, response) => {
     const cardId = request.params.id;
-    console.log(cardId, 'cardid');
     dataMapper.getOneCard(cardId, (error, result) => {
       const found = request.session.deck.find(card => card._id === cardId);
       if (found) {
@@ -21,7 +19,6 @@ const deckController = {
       }
       else {
         const deck = result[0];
-        console.log("onecarte", deck);
         request.session.deck.push(deck);
 
         response.redirect('/deck');
@@ -36,7 +33,6 @@ const deckController = {
         return card;
       }
     });
-    console.log('tableauFiltre', tableauFiltre)
     request.session.deck = tableauFiltre;
     response.redirect('/deck')
   },

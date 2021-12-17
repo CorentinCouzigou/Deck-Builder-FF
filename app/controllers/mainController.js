@@ -19,7 +19,6 @@ const mainController = {
       }
       else {
         const oneCard = result[0];
-        console.log("oneCard", oneCard);
         response.render('card', { oneCard });
       }
     });
