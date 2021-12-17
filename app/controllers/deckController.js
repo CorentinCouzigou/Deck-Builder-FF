@@ -30,15 +30,13 @@ const deckController = {
   },
 
   deleteCard: (request, response) => {
-    const cardId = +request.params.id;
+    const cardId = request.params.id;
     let tableauFiltre = request.session.deck.filter((card) => {
-      if (card._id === cardId) {
-        return false;
-      }
-      else {
-        return true;
+      if (card._id !== cardId) {
+        return card;
       }
     });
+    console.log('tableauFiltre', tableauFiltre)
     request.session.deck = tableauFiltre;
     response.redirect('/deck')
   },

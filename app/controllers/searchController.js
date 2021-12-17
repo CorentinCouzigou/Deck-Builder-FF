@@ -1,4 +1,5 @@
 const dataMapper = require('../dataMapper');
+const nameSchema = require('../validations/validate');
 
 const searchController = {
   searchPage: (request, response) => {
@@ -59,8 +60,16 @@ const searchController = {
 
     else if (request.query.name) {
       const searchName = request.query.name;
+      let errorMessage = nameSchema.validate({
+        name: searchName
+      }).error;
+      console.log('errorMessage', errorMessage);
       console.log(`recherche controller 1 ${searchName}`);
-      dataMapper.searchCardByName(searchName, (error, result) => {
+      if (errorMessage) {
+        return
+      }
+      const nameCardWithUppercase = searchName.charAt(0).toUpperCase() + searchName.slice(1);
+      dataMapper.searchCardByName(nameCardWithUppercase, (error, result) => {
         if (error) {
           response.status(500).send('Erreur ! Aucun enregistrement n\'a été créé');
           response.send('aucun enregistrement')
@@ -68,7 +77,6 @@ const searchController = {
         else {
           const research = result;
           console.log(`recherche 2 controller.rows ${research}`);
-
           response.render('research', { research });
         }
       });

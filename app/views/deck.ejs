@@ -5,12 +5,11 @@
 <div class="cardsContainer">
 <% if (cards.length > 0) { %>
     <% for (let card of cards) { %>
-        
             <div class="card">
                 <img src="/visuals/<%= card.visual %>" alt="<%= card.name %> illustration">
                <p class="cardName"><%= card.name %></p>
               </a>
-              <a class="link--addCard" title="Enlever du deck" href="/deck/delete/<%= card._id %>">[ - ]</a>
+              <a class="link--addCard" title="Enlever du deck" href="/deck/delete/<%= card._id %>"><i class="far fa-minus-square"></i></a>
             </div>
         
         <hr>
